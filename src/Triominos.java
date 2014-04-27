@@ -6,8 +6,8 @@ public class Triominos {
 		System.out.println("Jeu des triominos");
 		Random generator = new Random();
 		int base,size;
-		base =  2 + generator.nextInt()%15;
-		size =  1 + generator.nextInt()%6;
+		base =  2 + Math.abs(generator.nextInt()%15);
+		size =  1 + Math.abs(generator.nextInt()%6);
 		Jeu jeu = new Jeu(size,base);
 		Plateau p = new Plateau(size);
 		jeu.affiche();

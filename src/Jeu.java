@@ -17,9 +17,9 @@ public class Jeu {
 		Random generator = new Random();
 
 		for (int i=0;i<largeur*largeur;i++) {
-			tab[i]=new Triomino(generator.nextInt()%base,
-					generator.nextInt()%base,
-					generator.nextInt()%base);
+			tab[i]=new Triomino(Math.abs(generator.nextInt()%base),
+					Math.abs(generator.nextInt()%base),
+					Math.abs(generator.nextInt()%base));
 		}
 	}
 
