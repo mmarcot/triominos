@@ -1,14 +1,20 @@
 import java.util.Random;
 
 
+/**
+ * Classe principale 
+ */
 public class Triominos {
+	
 	public static void main(String args[]) {
 		System.out.println("Jeu des triominos");
+	
 		Random generator = new Random();
-		int base,size;
-		base =  2 + Math.abs(generator.nextInt()%15);
-		size =  1 + Math.abs(generator.nextInt()%6);
-		Jeu jeu = new Jeu(size,base);
+		
+		int base =  2 + Math.abs(generator.nextInt()%15);
+		int size =  1 + Math.abs(generator.nextInt()%6);
+		
+		Jeu jeu = new Jeu(size, base);
 		Plateau p = new Plateau(size);
 		jeu.affiche();
 
@@ -25,7 +31,6 @@ public class Triominos {
 		}
 
 		affiche_plateau_mini(p);
-
 	}
 
 	/**  
@@ -45,14 +50,14 @@ public class Triominos {
 		return '\0';
 	}
 
-
+	
 	static char charorstar(Triomino t,int c) {
 		if (t!=null)
 			return (onechar(c));
 		else return('*');
 	}
 
-	
+
 	/**
 	 * affiche un plateau, meme partiellement rempli.
 	 */

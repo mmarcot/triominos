@@ -12,11 +12,21 @@ public class ColonneTriominos{
 	}
 
 
-	void set(int j,Triomino t) {
+	/**
+	 * Place un triomino donné dans la colonne du plateau donnée
+	 * @param j numéro de la colonne
+	 * @param t triomino à placer
+	 */
+	void set(int j, Triomino t) {
 		colonne[j]=t;
 	}
 
 
+	/**
+	 * Accesseur d'un triomino d'une colonne à un endroit donné
+	 * @param j numéro du triomino dans la colonne 
+	 * @return le triomino
+	 */
 	Triomino get(int j) {
 		return colonne[j];
 	}

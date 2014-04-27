@@ -3,27 +3,31 @@ import java.util.Random;
 
 public class Jeu {
 	private int largeur;
+	/** tableau contenant l'ensemble de notre jeu de triominos */
 	private Triomino[] tab=null;
 
 
 	/**
 	 * Constructeur d'un jeu
 	 * @param largeur largeur
-	 * @param base base
+	 * @param base base des nombres des triominos
 	 */
-	Jeu(int largeur,int base) {
+	Jeu(int largeur, int base) {
 		this.largeur=largeur;
 		tab = new Triomino[largeur*largeur];
 		Random generator = new Random();
 
 		for (int i=0;i<largeur*largeur;i++) {
 			tab[i]=new Triomino(Math.abs(generator.nextInt()%base),
-					Math.abs(generator.nextInt()%base),
-					Math.abs(generator.nextInt()%base));
+													Math.abs(generator.nextInt()%base),
+													Math.abs(generator.nextInt()%base));
 		}
 	}
 
 
+	/**
+	 * Methode qui affiche notre jeu de triomino de départ
+	 */
 	void affiche() {
 		for(int i=0; i<largeur*largeur;i+=12){
 			int j1,j2,j3;
@@ -46,9 +50,24 @@ public class Jeu {
 		}
 	}
 
+	
+	/**
+	 * Methode qui retourne le i-ème triomino de notre jeu
+	 * @param i numéro du triomino dans le tableau
+	 * @return triomino correspondant
+	 */
 	Triomino get(int i) {
 		return tab[i];
 	}
 
 
 }
+
+
+
+
+
+
+
+
+
