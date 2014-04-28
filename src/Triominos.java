@@ -11,7 +11,9 @@ public class Triominos {
 	
 		Random generator = new Random();
 		
+		/** base encodage des caractère (de 1 à 16) */
 		int base =  2 + Math.abs(generator.nextInt()%15);
+		/** taille du triangle (pyramide) du plateau (de 1 à 6) */
 		int size =  1 + Math.abs(generator.nextInt()%6);
 		
 		Jeu jeu = new Jeu(size, base);
@@ -22,9 +24,11 @@ public class Triominos {
 		 *    on ne résout pas le problème ici
 		 */ 
 
+		// place les triominos de notre jeu sur le plateau mais 
+		// de facon désordonnée :
 		int k = 0;
-		for ( int i = 0; i < size; i++ ) {
-			for ( int j = 0; j < 2*i+1; j++ ) {
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < 2*i+1; j++) {
 				p.set(i,j,jeu.get(k));
 				k++;
 			}

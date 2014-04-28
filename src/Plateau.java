@@ -3,7 +3,9 @@
  * Plateau sur lequel on pose les triominos un par un de facon ordonnée
  */
 public class Plateau {
+	/** largeur du triangle */
 	int largeur;
+	/** tableau regroupant l'ensembre des colonnes de triominos */
 	ColonneTriominos[] col_triominos=null;
 
 	
@@ -15,6 +17,7 @@ public class Plateau {
 		this.largeur = largeur;
 		col_triominos = new ColonneTriominos[largeur];
 
+		// on construit les colonnes de triominos (top-left -> bottom-right) : :
 		for(int i=0; i<largeur; i++)
 			col_triominos[i]=new ColonneTriominos(2*i+1);
 	}

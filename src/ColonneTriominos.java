@@ -1,8 +1,13 @@
 
 
+/**
+ * Classe qui représente une colonne de triomino sur le plateau,
+ * colonne qui commence en haut à gauche et fini en bas à droite
+ */
 public class ColonneTriominos{
 	private Triomino[] colonne=null;
 
+	
 	/**
 	 * Constructeur d'une colonne de triominos
 	 * @param hauteur hauteur de la colonne de triominos
