@@ -63,8 +63,8 @@ public class Jeu {
 	Triomino get(int i) {
 		return tab[i];
 	}
-
-
+	
+	
 }
 
 

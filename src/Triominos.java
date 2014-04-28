@@ -11,7 +11,7 @@ public class Triominos {
 	
 		Random generator = new Random();
 		
-		/** base encodage des caractère (de 1 à 16) */
+		/** base encodage des caractère (de 2 à 16) */
 		int base =  2 + Math.abs(generator.nextInt()%15);
 		/** taille du triangle (pyramide) du plateau (de 1 à 6) */
 		int size =  1 + Math.abs(generator.nextInt()%6);
@@ -36,7 +36,39 @@ public class Triominos {
 
 		affiche_plateau_mini(p);
 	}
+	
+	
+	/**
+	 * Methode implantant l'algorithme de résolution du jeu de triominos
+	 * @param jeu_trio Notre jeu de triominos
+	 * @param plateau Reférence au plateau de triominos
+	 * @param pos Position du triomino dans le plateau
+	 * @param largeur Largeur du plateau de triominos
+	 * @return True si trouve une solution, false sinon
+	 */
+	public boolean resoudre(Triominos[] jeu_trio, Plateau plateau, int pos, int largeur) {
+		/* 
+		next_pos = next(pos, largeur);
+		si next_pos = fin alors
+			retourner true;
+		sinon
+			pour chaque trio appartenant à jeu_trio faire
+				enlever(jeu_trio, trio);
+				pour rot appartenant à {0, 1, 2} faire
+					si contraintes(trio, pos, plateau) alors
+						placer(plateau, trio, pos);
+						si resoudre(jeu_trio, plateau, next_pos, largeur) alors
+							retourner true;
+						enlever(plateau, trio, pos);
+					rotation(trio, rot);
+				ajouter(jeu_trio, trio);
+			retourner false;
+		fsi
+		*/
+		return false;
+	}
 
+	
 	/**  
 	 * conversion d'un entier positif (<62) en caractere [0-9A-Za-z]
 	 */
