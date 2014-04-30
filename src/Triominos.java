@@ -47,27 +47,120 @@ public class Triominos {
 	 * @return True si trouve une solution, false sinon
 	 */
 	public boolean resoudre(Triominos[] jeu_trio, Plateau plateau, int pos, int largeur) {
-		/* 
-		next_pos = next(pos, largeur);
-		si next_pos = fin alors
-			retourner true;
-		sinon
-			pour chaque trio appartenant à jeu_trio faire
-				enlever(jeu_trio, trio);
-				pour rot appartenant à {0, 1, 2} faire
-					si contraintes(trio, pos, plateau) alors
-						placer(plateau, trio, pos);
-						si resoudre(jeu_trio, plateau, next_pos, largeur) alors
-							retourner true;
-						enlever(plateau, trio, pos);
-					rotation(trio, rot);
-				ajouter(jeu_trio, trio);
-			retourner false;
-		fsi
-		*/
+		int next_pos = next(pos, largeur);
+		
+		if( next_pos == -1 ) { // fin
+			return true;
+		}
+		else {
+			for(int i=0; i<jeu_trio.length; i++) {
+				enleverDuJeu(jeu_trio, jeu_trio[i]);
+				
+				for(int r=0; r<3; r++) {
+					if( contraintes(jeu_trio[i], pos, plateau)) {
+						placerSurPlateau(plateau, jeu_trio[i], pos);
+						
+						if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
+							return true;
+						
+						enleverDuPlateau(plateau, jeu_trio[i], pos);
+					}
+					rotation(jeu_trio[i], r);
+				}
+				ajouterAuJeu(jeu_trio, jeu_trio[i]);
+			}
+		}
+		
 		return false;
 	}
 
+	
+	/**
+	 * Methode qui donne la position du triomino suivant
+	 * @param pos position actuelle
+	 * @param largeur largeur du plateau 
+	 * @return position suivante ou -1 si c'est la fin
+	 */
+	private int next(int pos, int largeur) {
+		if( pos < largeur*largeur )
+			return pos+1;
+		else return -1;
+  }
+	
+	
+	/**
+	 * Methode qui ajoute un triomino à notre jeu de triominos
+	 * @param jeu_trio Notre jeu de triominos
+	 * @param triominos Le triomino à ajouter
+	 */
+	private void ajouterAuJeu(Triominos[] jeu_trio, Triominos triominos) {
+	  // TODO Auto-generated method stub
+	  
+  }
+	
+	
+	/**
+	 * Methode qui enleve un triomino de notre jeu
+	 * @param jeu_trio Notre jeu de triominos
+	 * @param triominos Le triominos à enlever
+	 */
+	private void enleverDuJeu(Triominos[] jeu_trio, Triominos triominos) {
+	  // TODO Auto-generated method stub
+	  
+  }
+
+	
+	/**
+	 * Methode qui place un triominos sur le plateau
+	 * @param plateau Plateau de triominos
+	 * @param triominos Le triomino à placer
+	 * @param pos La position 
+	 */
+	private void placerSurPlateau(Plateau plateau, Triominos triominos, int pos) {
+	  // TODO Auto-generated method stub
+	  
+  }
+
+	
+	/**
+	 * Methode qui enlève un triomino du plateau
+	 * @param plateau Plateau de triominos
+	 * @param triominos Triomino à enlever
+	 * @param pos Position
+	 */
+	private void enleverDuPlateau(Plateau plateau, Triominos triominos, int pos) {
+	  // TODO Auto-generated method stub
+	  
+  }
+
+
+	/**
+	 * Méthode qui permet de tourner un triomino sur place
+	 * @param triominos Le triomino à tourner
+	 * @param r L'orientation actuelle 
+	 */
+	private void rotation(Triominos triominos, int r) {
+	  // TODO Auto-generated method stub
+	  
+  }
+
+
+	/**
+	 * Methode  qui verifie les contraintes (si le triomino s'accorde avec les 
+	 * voisins ou non.
+	 * @param triominos Le triomino en question
+	 * @param pos La position actuelle sur le plateau
+	 * @param plateau Le plateau de triominos
+	 * @return true si on peut le placer dans ce sens, false sinon
+	 */
+	private boolean contraintes(Triominos triominos, int pos, Plateau plateau) {
+	  // TODO Auto-generated method stub
+	  return false;
+  }
+
+
+
+	
 	
 	/**  
 	 * conversion d'un entier positif (<62) en caractere [0-9A-Za-z]
