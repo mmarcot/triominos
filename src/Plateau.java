@@ -18,8 +18,9 @@ public class Plateau {
 		col_triominos = new ColonneTriominos[largeur];
 
 		// on construit les colonnes de triominos (top-left -> bottom-right) : :
-		for(int i=0; i<largeur; i++)
+		for(int i=0; i<largeur; i++) {
 			col_triominos[i]=new ColonneTriominos(2*i+1);
+		}
 	}
 
 	
@@ -43,6 +44,7 @@ public class Plateau {
 	Triomino get(int i,int j) {
 		return col_triominos[i].get(j);
 	}
+	
 
 }
 

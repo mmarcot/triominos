@@ -33,7 +33,7 @@ public class Triominos {
 //				k++;
 //			}
 //		}
-		if( resoudre(jeu, p, 1, size) )
+		if( resoudre(jeu, p, 0, size) )
 			affiche_plateau_mini(p);
 	}
 	
@@ -66,12 +66,12 @@ public class Triominos {
 						for(int r=0; r<3; r++) {
 							if( contraintes(jeu_trio.get(num_trio), plateau, pos) ) {
 								// on place le triomino sur le plateau :
-								plateau.set(num_col, num_ligne, jeu_trio.get(num_trio));
+								plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], jeu_trio.get(num_trio));
 								
 								if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
 									return true;
 								else {
-									plateau.set(num_col, num_ligne, null);
+									plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], null);
 								}
 								
 							}
@@ -80,10 +80,8 @@ public class Triominos {
 						
 						// si le triomino ne passe pas, on le remet dans notre jeu :
 						jeu_trio.get(num_trio).setPlace(false);
-						num_trio++;
 					}
-					
-					
+					num_trio++;
 				}
 			}
 		}
@@ -118,11 +116,8 @@ public class Triominos {
 		int num_col = 0, num_ligne = 0;
 		int l = plateau.largeur;
 		
-		//TODO recuperé le num_col et le num_ligne en fonction de la pos
-			
-			
-//		num_col = pos%plateau.largeur;
-//		num_ligne = pos/plateau.largeur;
+		num_col = posToCoord(plateau,pos)[0];
+		num_ligne = posToCoord(plateau,pos)[1];
 		
 		System.out.println(pos + "    " + num_col + "     "  + num_ligne);
 		
@@ -130,7 +125,7 @@ public class Triominos {
 			return true;
 		else {
 			if( num_ligne%2 == 1 ) { // ligne impaire
-				if( plateau.get(num_col-1, num_ligne-1).b != trio.b )
+				if( plateau.get(num_col-1, num_ligne-1).b != trio.b ) 
 					return false;
 				
 				if( plateau.get(num_col, num_ligne-1).a != trio.a )
@@ -148,24 +143,53 @@ public class Triominos {
 	/**
 	 * Methode qui convertit une position dans un triangle en numero de 
 	 * colonne et de ligne
+	 * @param p 
 	 * @param pos
-	 * @param largeur
 	 * @return
 	 */
-	private static int[] posToCoord(int pos, int largeur) {
+	private static int[] posToCoord(Plateau p, int pos) {
 		int[] coord = new int[2];
 		int col = 0, ligne = 0;
+		int col_perdu = 0;
+		int[] taille_ligne = tailleLigne(p.largeur);
 		
-		if(pos < largeur) {
-			col = pos;
-			ligne = 0;
+
+		for(int i=0; i<taille_ligne.length; i++){
+			if( pos < taille_ligne[i]) {
+				col_perdu = p.largeur - taille_ligne[i];
+				col = pos + col_perdu;
+				ligne = i ;
+				break;
+			}
+			else pos -= taille_ligne[i];
 		}
-		else if( pos >= largeur)
-		
 		
 		coord[0] = col;
 		coord[1] = ligne;
+		
 		return coord;
+	}
+	
+	/**
+	 * Methode qui renvoie la taille de toutes les lignes
+	 * @param largeur
+	 * @return
+	 */
+	public static int[] tailleLigne(int largeur) { // OK
+		int nb_lignes = largeur*2-1;
+		int[] taille_ligne = new int[nb_lignes];
+		boolean passage = true;
+		
+		for(int i=0; i<nb_lignes; i++) {
+			taille_ligne[i] = largeur;
+			
+			if(passage) {
+				largeur--;
+				passage = false;
+			}
+			else passage = true;
+		}
+		return taille_ligne;
 	}
 
 
