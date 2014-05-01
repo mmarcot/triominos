@@ -54,28 +54,36 @@ public class Triominos {
 		}
 		else {
 			// on parcours notre jeu de triominos :
-			for(int i=0; i<largeur*largeur; i++) {
-				
-				// on enlève de notre jeu le triomino en cours :
-				jeu_trio.get(i).setPlace(true);
-				
-				// on essaye de le placer dans les 3 sens possibles :
-				for(int r=0; r<3; r++) {
+			int num_trio = 0;
+			for(int num_col=0; num_col<largeur; num_col++) {
+				for(int num_ligne=0; num_ligne<2*num_col+1; num_ligne++) { 
 					
-					// si les contraintes avec les voisins sont respectées :
-					if( contraintes(jeu_trio.get(i), pos, plateau)) {
-						placerSurPlateau(plateau, jeu_trio.get(i), pos);
+					// on enlève de notre jeu le triomino en cours :
+					jeu_trio.get(num_trio).setPlace(true);
+					
+					// on essaye de le placer dans les 3 sens possibles :
+					for(int r=0; r<3; r++) {
 						
-						if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
-							return true;
-						
-						enleverDuPlateau(plateau, jeu_trio.get(i), pos);
+						// si les contraintes avec les voisins sont respectées :
+						if( contraintes(jeu_trio.get(num_trio), plateau, num_col, num_ligne) ) {
+							
+							// on place le triomino sur le plateau :
+							plateau.set(num_col, num_ligne, jeu_trio.get(num_trio));
+							
+							// appel recursif :
+							if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
+								return true;
+							else plateau.set(num_col, num_ligne, null);
+							
+						}
+						jeu_trio.get(num_trio).tourner();
 					}
-					jeu_trio.get(i).tourner();
+					
+					// si le triomino ne passe pas, on le remet dans notre jeu :
+					jeu_trio.get(num_trio).setPlace(false);
+					
+					num_trio++;
 				}
-				
-				// si le triomino ne passe pas, on le remet dans notre jeu :
-				jeu_trio.get(i).setPlace(false);
 			}
 		}
 		
@@ -96,41 +104,6 @@ public class Triominos {
   }
 	
 
-	
-	/**
-	 * Methode qui place un triominos sur le plateau
-	 * @param plateau Plateau de triominos
-	 * @param jeu_trio Le triomino à placer
-	 * @param pos La position 
-	 */
-	private void placerSurPlateau(Plateau plateau, Triomino jeu_trio, int pos) {
-	  // TODO Auto-generated method stub
-	  
-  }
-
-	
-	/**
-	 * Methode qui enlève un triomino du plateau
-	 * @param plateau Plateau de triominos
-	 * @param jeu_trio Triomino à enlever
-	 * @param pos Position
-	 */
-	private void enleverDuPlateau(Plateau plateau, Triomino jeu_trio, int pos) {
-	  // TODO Auto-generated method stub
-	  
-  }
-
-
-	/**
-	 * Méthode qui permet de tourner un triomino sur place
-	 * @param triominos Le triomino à tourner
-	 * @param r L'orientation actuelle 
-	 */
-	private void rotation(Triominos triominos, int r) {
-	  // TODO Auto-generated method stub
-	  
-  }
-
 
 	/**
 	 * Methode  qui verifie les contraintes (si le triomino s'accorde avec les 
@@ -140,7 +113,7 @@ public class Triominos {
 	 * @param plateau Le plateau de triominos
 	 * @return true si on peut le placer dans ce sens, false sinon
 	 */
-	private boolean contraintes(Triomino jeu_trio, int pos, Plateau plateau) {
+	private boolean contraintes(Triomino trio, Plateau plateau, int num_col, int num_ligne) {
 	  // TODO Auto-generated method stub
 	  return false;
   }
