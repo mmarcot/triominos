@@ -41,7 +41,7 @@ public class Triomino{
 	
 	
 	/**
-	 * Methode qui permet de tourner un triomino dans le sens horaire
+	 * Methode qui permet de tourner un triomino
 	 */
 	public void tourner() {
 		int tmp = b;
