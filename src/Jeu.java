@@ -7,7 +7,7 @@ import java.util.Random;
 public class Jeu {
 	private int largeur;
 	/** tableau contenant l'ensemble de notre jeu de triominos */
-	private Triomino[] tab=null;
+	Triomino[] tab=null;
 
 
 	/**

@@ -5,6 +5,7 @@ import java.util.Random;
  * Classe principale 
  */
 public class Triominos {
+	static int cpt = 0;
 	
 	public static void main(String args[]) {
 		System.out.println("Jeu des triominos");
@@ -20,21 +21,11 @@ public class Triominos {
 		Plateau p = new Plateau(size);
 		jeu.affiche();
 
-		/*  placer les triominos sur le plateau.
-		 *    on ne résout pas le problème ici
-		 */ 
 
-		// place les triominos de notre jeu sur le plateau mais 
-		// de facon désordonnée :
-//		int k = 0;
-//		for(int i = 0; i < size; i++) {
-//			for(int j = 0; j < 2*i+1; j++) {
-//				p.set(i,j,jeu.get(k));
-//				k++;
-//			}
-//		}
-		if( resoudre(jeu, p, 0, size) )
+		if( resoudre(jeu, p, 0, size) ) {
 			affiche_plateau_mini(p);
+			System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
+		}
 	}
 	
 	
@@ -54,34 +45,29 @@ public class Triominos {
 		}
 		else {
 			// on parcours notre jeu de triominos :
-			int num_trio = 0;
-			for(int num_col=0; num_col<largeur; num_col++) {
-				for(int num_ligne=0; num_ligne<2*num_col+1; num_ligne++) { 
+			for(int num_trio=0; num_trio<jeu_trio.tab.length; num_trio++) {
+				
+				if( jeu_trio.get(num_trio).estPlace() == false ) {
+					// on enlève de notre jeu le triomino en cours :
+					jeu_trio.get(num_trio).setPlace(true);
 					
-					if( jeu_trio.get(num_trio).estPlace() == false ) {
-						// on enlève de notre jeu le triomino en cours :
-						jeu_trio.get(num_trio).setPlace(true);
+					// on essaye de le placer dans les 3 sens possibles :
+					for(int r=0; r<3; r++) {
+						if( contraintes(jeu_trio.get(num_trio), plateau, pos) ) {
+							// on place le triomino sur le plateau :
+							plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], jeu_trio.get(num_trio));
+							
+							if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
+								return true;
 						
-						// on essaye de le placer dans les 3 sens possibles :
-						for(int r=0; r<3; r++) {
-							if( contraintes(jeu_trio.get(num_trio), plateau, pos) ) {
-								// on place le triomino sur le plateau :
-								plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], jeu_trio.get(num_trio));
-								
-								if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
-									return true;
-								else {
-									plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], null);
-								}
-								
-							}
-							jeu_trio.get(num_trio).tourner();
+							// on l'enlève du plateau :
+							plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], null);
 						}
-						
-						// si le triomino ne passe pas, on le remet dans notre jeu :
-						jeu_trio.get(num_trio).setPlace(false);
+						jeu_trio.get(num_trio).tourner();
 					}
-					num_trio++;
+					
+					// si le triomino ne passe pas, on le remet dans notre jeu :
+					jeu_trio.get(num_trio).setPlace(false);
 				}
 			}
 		}
@@ -116,16 +102,17 @@ public class Triominos {
 		int num_col = posToCoord(plateau,pos)[0];
 		int num_ligne = posToCoord(plateau,pos)[1];
 		
-		System.out.println(pos + "    " + num_col + "     "  + num_ligne);
+		//System.out.println(pos + "    " + num_col + "     "  + num_ligne);
+		cpt++;
 		
 		if( num_ligne == 0 )
 			return true;
 		else {
 			if( num_ligne%2 == 1 ) { // ligne impaire
-				if( plateau.get(num_col-1, num_ligne-1).a != trio.a )  /// b b
+				if( plateau.get(num_col-1, num_ligne-1).a != trio.a )
 					return false;
 				
-				if( plateau.get(num_col, num_ligne-1).b != trio.b ) /// a a
+				if( plateau.get(num_col, num_ligne-1).b != trio.b ) 
 					return false;
 			}
 			else { // ligne paire
@@ -140,9 +127,9 @@ public class Triominos {
 	/**
 	 * Methode qui convertit une position dans un triangle en numero de 
 	 * colonne et de ligne
-	 * @param p 
-	 * @param pos
-	 * @return
+	 * @param p Plateau
+	 * @param pos Postion dans le triangle 
+	 * @return tableau de coord tab[0]=col et tab[1]=ligne
 	 */
 	private static int[] posToCoord(Plateau p, int pos) {
 		int[] coord = new int[2];
@@ -168,9 +155,9 @@ public class Triominos {
 	}
 	
 	/**
-	 * Methode qui renvoie la taille de toutes les lignes
-	 * @param largeur
-	 * @return
+	 * Methode qui renvoie la taille de toutes les lignes dans un triangle
+	 * @param largeur Largeur du triangle
+	 * @return tableau qui à la ligne i associe n triominos
 	 */
 	public static int[] tailleLigne(int largeur) { // OK
 		int nb_lignes = largeur*2-1;
