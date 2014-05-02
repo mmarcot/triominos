@@ -11,11 +11,11 @@ public class Jeu {
 
 
 	/**
-	 * Constructeur d'un jeu de triominos
+	 * Constructeur d'un jeu de triominos random
 	 * @param largeur largeur du triangle (plateau)
 	 * @param base base encodage des nombres des triominos
 	 */
-	Jeu(int largeur, int base) {
+	public Jeu(int largeur, int base) {
 		this.largeur=largeur;
 		tab = new Triomino[largeur*largeur];
 		Random generator = new Random();
@@ -27,6 +27,17 @@ public class Jeu {
 													Math.abs(generator.nextInt()%base));
 		}
 	}
+
+
+	/**
+	 * Contructeur d'un jeu de triomino à partir d'un fichier texter
+	 * @param size Largeur du plateau
+	 * @param base Base encodage caractères
+	 * @param tab_trio Tableau contenant notre jeu de triominos
+	 */
+	public Jeu(int size, int base, Triomino[] tab_trio) {
+	  // TODO Auto-generated constructor stub
+  }
 
 
 	/**

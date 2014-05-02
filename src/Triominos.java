@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Random;
 
 
@@ -5,28 +6,53 @@ import java.util.Random;
  * Classe principale 
  */
 public class Triominos {
-	static int cpt = 0;
+	/** compteur de coups */
+	static BigInteger cpt = new BigInteger("0");
 	
 	public static void main(String args[]) {
 		System.out.println("Jeu des triominos");
-	
-		Random generator = new Random();
+		int base, size = 0;
+		Jeu jeu = null;
 		
-		/** base encodage des caractère (de 2 à 16) */
-		int base =  2 + Math.abs(generator.nextInt()%15);
-		/** taille du triangle (pyramide) du plateau (de 1 à 6) */
-		int size =  1 + Math.abs(generator.nextInt()%6);
-		
-		Jeu jeu = new Jeu(size, base);
-		Plateau p = new Plateau(size);
-		jeu.affiche();
 
-
-		if( resoudre(jeu, p, 0, size) ) {
-			affiche_plateau_mini(p);
-			System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
+		if( args.length == 0 ) { // mode random :
+			Random generator = new Random();
+			/** base encodage des caractère (de 2 à 16) */
+			base =  2 + Math.abs(generator.nextInt()%15);
+			/** taille du triangle (pyramide) du plateau (de 1 à 6) */
+			size =  1 + Math.abs(generator.nextInt()%6);
+			
+			jeu = new Jeu(size, base);
 		}
-		else System.out.println("\nPas de solution");
+		else if( args.length == 1 ) { // mode fichier :
+			LectureFichier fich = new LectureFichier(args[0]);
+			base = fich.getBase();
+			size = fich.getSize();
+			
+			jeu = new Jeu(size, base, fich.getTab_trio());
+		}
+		else if( args.length == 2 ) { // mode random parametrable :
+			base = Integer.valueOf(args[0]);
+			size = Integer.valueOf(args[1]);
+			
+			jeu = new Jeu(size, base);
+		}
+		else { // erreur commande
+			System.out.println("Mauvaise commande merci de vous référer au fichier README");
+		}
+		
+		
+		if(jeu != null) {
+			Plateau p = new Plateau(size);
+			jeu.affiche();
+	
+	
+			if( resoudre(jeu, p, 0, size) ) {
+				affiche_plateau_mini(p);
+				System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
+			}
+			else System.out.println("\nPas de solution");
+		}
 	}
 	
 	
@@ -57,6 +83,7 @@ public class Triominos {
 						if( contraintes(jeu_trio.get(num_trio), plateau, pos) ) {
 							// on place le triomino sur le plateau :
 							plateau.set(posToCoord(plateau,pos)[0], posToCoord(plateau,pos)[1], jeu_trio.get(num_trio));
+							cpt = cpt.add(BigInteger.ONE);
 							
 							if( resoudre(jeu_trio, plateau, next_pos, largeur) ) 
 								return true;
@@ -103,9 +130,6 @@ public class Triominos {
 		int num_col = posToCoord(plateau,pos)[0];
 		int num_ligne = posToCoord(plateau,pos)[1];
 		
-		//System.out.println(pos + "    " + num_col + "     "  + num_ligne);
-		cpt++;
-		
 		if( num_ligne == 0 )
 			return true;
 		else {
@@ -135,7 +159,7 @@ public class Triominos {
 	private static int[] posToCoord(Plateau p, int pos) {
 		int[] coord = new int[2];
 		int col = 0, ligne = 0;
-		int col_perdu = 0;
+		int col_perdu = 0; // nb de colonne perdu en passant à la ligne suivante
 		int[] taille_ligne = tailleLigne(p.largeur);
 		
 
