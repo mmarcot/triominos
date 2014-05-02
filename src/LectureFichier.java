@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
-
 public class LectureFichier {
 	
 	private Triomino[] tab_trio;
@@ -25,7 +23,7 @@ public class LectureFichier {
 	    while(sc.hasNextLine()) {
 	    	String line = sc.nextLine();
 	    	
-	    	// chargement des listes :
+	    	//##### chargement des listes : #####
 	    	if(line.contains("^")) // top line
 	    		continue;
 	    	else if( line.contains("_")) { // bottom line
@@ -47,7 +45,7 @@ public class LectureFichier {
 	    		}
 	    	}
 	    }
-    	// on construit le tableau de triominos
+    	//##### on construit le tableau de triominos : #####
     	tab_trio = new Triomino[bot.size()];
     	size = (int) Math.sqrt(bot.size());
     	int i = 0;
@@ -59,18 +57,31 @@ public class LectureFichier {
     } 
 		catch (FileNotFoundException e) {
     	System.out.println("Le fichier " + nom_fich + " n'existe pas");
+    	System.exit(2);
     }
 
 	}
-
+	
+	/**
+	 * Acceesseur de l'attribut base
+	 * @return la base d'encodage
+	 */
 	public int getBase() {
 	  return base;
   }
 
+	/**
+	 * Acceusseur de l'attribut size
+	 * @return la largeur du plateau
+	 */
 	public int getSize() {
 	  return size;
   }
 
+	/**
+	 * Accesseur de l'attribut contenant le tableau de triominos
+	 * @return tableau de triominos lu dans le fichier
+	 */
 	public Triomino[] getTab_trio() {
 	  return tab_trio;
   }

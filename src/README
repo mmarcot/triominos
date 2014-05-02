@@ -1,0 +1,23 @@
+###########################################################
+#                        TRIOMINO                         #
+###########################################################
+
+Auteurs : Mallory MARCOT, Nicolas PHUNG
+le : 02/05/14
+
+
+1) Fonctionement
+-----------------------------------------
+
+Trois modes sont possible :
+
+-> le mode RANDOM en laissant l'ordinateur decider de la base et de la largeur du plateau, ainsi que de la valeur de tous les triominos.
+  COMMANDE : java Triominos
+
+-> le mode RANDOM PARAMETRABLE : vous laissez l'ordinateur choisir la valeur des triominos, mais vous entrez la base et la largeur du plateau.
+  COMMANDE : java Triominos base largeur
+  EX : java Triominos 3 5
+
+-> le mode FICHIER : vous entrez dans un fichier les triominos de facon formaté (voir les 2 exemples fournis)
+  COMMANDE : java Triominos nom_de_votre_fichier
+  EX : java Triominos mon_jeu.txt 

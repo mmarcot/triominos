@@ -39,20 +39,17 @@ public class Triominos {
 		}
 		else { // erreur commande
 			System.out.println("Mauvaise commande merci de vous référer au fichier README");
+			System.exit(1);
 		}
 		
-		
-		if(jeu != null) {
-			Plateau p = new Plateau(size);
-			jeu.affiche();
-	
-	
-			if( resoudre(jeu, p, 0, size) ) {
-				affiche_plateau_mini(p);
-				System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
-			}
-			else System.out.println("\nPas de solution");
+		Plateau p = new Plateau(size);
+		jeu.affiche();
+
+		if( resoudre(jeu, p, 0, size) ) {
+			affiche_plateau_mini(p);
+			System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
 		}
+		else System.out.println("\nPas de solution, " + cpt + " coup(s)");
 	}
 	
 	
