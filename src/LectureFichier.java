@@ -46,17 +46,16 @@ public class LectureFichier {
 	    			}
 	    		}
 	    	}
-	    	
-	    	// on construit le tableau de triominos
-	    	tab_trio = new Triomino[bot.size()];
-	    	size = (int) Math.sqrt(bot.size());
-	    	int i = 0;
-	    	while( !mid.isEmpty() && !bot.isEmpty() ) {
-	    		tab_trio[i] = new Triomino(bot.remove(0), mid.remove(0), mid.remove(0) );
-	    		i++;
-	    	}
-	    	
 	    }
+    	// on construit le tableau de triominos
+    	tab_trio = new Triomino[bot.size()];
+    	size = (int) Math.sqrt(bot.size());
+    	int i = 0;
+    	while( !mid.isEmpty() && !bot.isEmpty() ) {
+    		tab_trio[i] = new Triomino(bot.remove(0), mid.remove(1), mid.remove(0) );
+    		i++;
+    	}
+    	
     } 
 		catch (FileNotFoundException e) {
     	System.out.println("Le fichier " + nom_fich + " n'existe pas");
