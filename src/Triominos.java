@@ -26,6 +26,7 @@ public class Triominos {
 			affiche_plateau_mini(p);
 			System.out.println("\nSolution trouvée en " + cpt + " coup(s) !");
 		}
+		else System.out.println("\nPas de solution");
 	}
 	
 	
@@ -212,8 +213,10 @@ public class Triominos {
 		for (int i = 0 ; i < p.largeur ; i++) {
 			for (int l=0; l<3; l++) {      
 				int k;
-				for(k=0 ; k<p.largeur-i;k++) System.out.print("   ");
-				if (l%2>0) System.out.print(" ");
+				for(k=0 ; k<p.largeur-i;k++) 
+					System.out.print("   ");
+				if (l%2>0) 
+					System.out.print(" ");
 
 				for (int j=0 ; j <= 2*i ; j++ ){
 					Triomino t=p.get(i,j);
