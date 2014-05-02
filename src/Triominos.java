@@ -113,22 +113,19 @@ public class Triominos {
 	 * @return true si on peut le placer dans ce sens, false sinon
 	 */
 	private static boolean contraintes(Triomino trio, Plateau plateau, int pos) {
-		int num_col = 0, num_ligne = 0;
-		int l = plateau.largeur;
-		
-		num_col = posToCoord(plateau,pos)[0];
-		num_ligne = posToCoord(plateau,pos)[1];
+		int num_col = posToCoord(plateau,pos)[0];
+		int num_ligne = posToCoord(plateau,pos)[1];
 		
 		System.out.println(pos + "    " + num_col + "     "  + num_ligne);
 		
-		if( num_ligne == 0 || num_col == 0 )
+		if( num_ligne == 0 )
 			return true;
 		else {
 			if( num_ligne%2 == 1 ) { // ligne impaire
-				if( plateau.get(num_col-1, num_ligne-1).b != trio.b ) 
+				if( plateau.get(num_col-1, num_ligne-1).a != trio.a )  /// b b
 					return false;
 				
-				if( plateau.get(num_col, num_ligne-1).a != trio.a )
+				if( plateau.get(num_col, num_ligne-1).b != trio.b ) /// a a
 					return false;
 			}
 			else { // ligne paire
