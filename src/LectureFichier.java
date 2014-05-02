@@ -9,14 +9,14 @@ import java.util.Scanner;
 public class LectureFichier {
 	
 	private Triomino[] tab_trio;
-	private int base;
+	private int base = 0;
 	private int size;
 
 	public LectureFichier(String nom_fich) {
 		// liste des chiffres rencontrés sur la ligne du milieu (mid) et
 		// du bas (bot) :
-		ArrayList<Character> mid = new ArrayList<Character>();
-		ArrayList<Character> bot = new ArrayList<Character>();
+		ArrayList<Integer> mid = new ArrayList<Integer>();
+		ArrayList<Integer> bot = new ArrayList<Integer>();
 		
 		
 		try {
@@ -28,23 +28,33 @@ public class LectureFichier {
 	    	// chargement des listes :
 	    	if(line.contains("^")) // top line
 	    		continue;
-	    	else if( line.contains("/")) { // bottom line
+	    	else if( line.contains("_")) { // bottom line
 	    		for(int i=0; i<line.length(); i++) {
-	    			char carac = line.toUpperCase().charAt(i);
-	    			if( "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".contains(""+carac) ) 
-	    				bot.add(carac);
+	    			char carac = line.charAt(i);
+	    			if( "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".contains(""+carac) ) {
+	    				bot.add(Character.getNumericValue(carac));
+	    				base = Math.max(base, Character.getNumericValue(carac) );
+	    			}
 	    		}
 	    	}
 	    	else { // middle line
 	    		for(int i=0; i<line.length(); i++) {
-	    			char carac = line.toUpperCase().charAt(i);
-	    			if( "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".contains(""+carac) ) 
-	    				mid.add(carac);
+	    			char carac = line.charAt(i);
+	    			if( "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".contains(""+carac) ) {
+	    				mid.add(Character.getNumericValue(carac));
+	    				base = Math.max(base, Character.getNumericValue(carac) );
+	    			}
 	    		}
 	    	}
 	    	
-	    	//TODO conversion des listes en tableau de triominos
-	    	
+	    	// on construit le tableau de triominos
+	    	tab_trio = new Triomino[bot.size()];
+	    	size = (int) Math.sqrt(bot.size());
+	    	int i = 0;
+	    	while( !mid.isEmpty() && !bot.isEmpty() ) {
+	    		tab_trio[i] = new Triomino(bot.remove(0), mid.remove(0), mid.remove(0) );
+	    		i++;
+	    	}
 	    	
 	    }
     } 
@@ -55,13 +65,11 @@ public class LectureFichier {
 	}
 
 	public int getBase() {
-	  // TODO Auto-generated method stub
-	  return 0;
+	  return base;
   }
 
 	public int getSize() {
-	  // TODO Auto-generated method stub
-	  return 0;
+	  return size;
   }
 
 	public Triomino[] getTab_trio() {

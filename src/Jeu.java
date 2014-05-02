@@ -36,7 +36,8 @@ public class Jeu {
 	 * @param tab_trio Tableau contenant notre jeu de triominos
 	 */
 	public Jeu(int size, int base, Triomino[] tab_trio) {
-	  // TODO Auto-generated constructor stub
+	  this.largeur = size;
+	  tab = tab_trio;
   }
 
 
