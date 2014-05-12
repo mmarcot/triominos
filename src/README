@@ -1,9 +1,10 @@
-###########################################################
-#                        TRIOMINO                         #
-###########################################################
+###################################################################
+#                            TRIOMINO                             #
+###################################################################
 
 Auteurs : Mallory MARCOT, Nicolas PHUNG
 le : 02/05/14
+
 
 
 1) Fonctionement
@@ -25,6 +26,7 @@ Trois modes sont possible :
 
 
 
+
 2) Originalités
 ---------------------------------------
 
@@ -40,7 +42,7 @@ Dans cette classe nous avons ajouté un constructeur permettant de créer un jeu
 
   ### Classe LectureFichier ###
 
-Nous avons choisis d'implementer cette classe pour centraliser toutes les instructions relatives à la lecture de triominos dans un fichier texte. On a choisis d'utiliser 2 ArrayList : une pour stocker toutes le valeurs du milieu des triominos (coins B et C), et l'autre pour les valeurs du bas (coin A). 
+Nous avons choisis d'implementer cette classe pour centraliser toutes les instructions relatives à la lecture de triominos dans un fichier texte. On a choisis d'utiliser 2 ArrayList : une pour stocker toutes le valeurs du milieu des triominos (coins B et C), et l'autre pour les valeurs du bas (coin A).
 
 
   ### Classe Triominos ###
@@ -55,12 +57,15 @@ Nous avons choisis d'utiliser la classe BigInteger pour le type du compteur de c
 
 
 
+
 2) Conclusion
 ---------------------------------------
 
-Ce qu'il y a de bien c'est que notre projet fonctionne avec n'importe qu'elle taille de plateau (testé jusqu'à 30). La résolution devient vraiment complexe lorsque l'ont augmente la base. 
-Nous avons dû passer environ 15h sur ce projet, ce qui nous à pris le plus de temps est :
+Ce qu'il y a de bien c'est que notre projet fonctionne avec n'importe qu'elle taille de plateau (testé jusqu'à 30 soit 900 triominos). La résolution devient vraiment 
+complexe lorsque l'ont augmente la base. Nous avons dû passer environ 15h sur ce projet, ce qui nous à pris le plus de temps est :
+
   - la gestion des contraintes de placement
+
   - le fait de devoir retrouver un numéro de ligne et de colonne à partir d'une position
 
 
