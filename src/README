@@ -2,7 +2,6 @@
 #                            TRIOMINO                             #
 ###################################################################
 
-Auteurs : Mallory MARCOT, Nicolas PHUNG
 le : 02/05/14
 
 
@@ -10,7 +9,7 @@ le : 02/05/14
 1) Fonctionement
 -----------------------------------------
 
-Trois modes sont possible :
+Trois modes sont possibles :
 
 -> le mode RANDOM en laissant l'ordinateur decider de la base et de la largeur du plateau, ainsi que de la valeur de tous les triominos.
   COMMANDE : java Triominos
@@ -32,7 +31,7 @@ Trois modes sont possible :
 
   ### Classe Triomino ###
 
-Nous avons décidé d'ajouté dans cette classe un attribut qui indique si le triomino est placé ou non sur le plateau, cela permet d'éviter de le sortir/rentrer du jeu de triomino, et donc de simplifier le code.
+Nous avons décidé d'ajouter dans cette classe un attribut qui indique si le triomino est placé ou non sur le plateau, cela permet d'éviter de le sortir/rentrer du jeu de triomino, et donc de simplifier le code.
 
 
   ### Classe Jeu ###
@@ -47,11 +46,11 @@ Nous avons choisis d'implementer cette classe pour centraliser toutes les instru
 
   ### Classe Triominos ###
 
-La methode centrale est "resoudre" qui implemente l'algorithme recursif.
+La methode centrale est "resoudre" qui implemente l'algorithme récursif.
 
 Les contraintes de placement sont gérées dans la methode "contraintes" qui différencie les lignes paires des impaires.
 
-Pour passer d'une position (donc un simple entier) à des coordonnés de ligne et de colonne dans un triangle nous avons réalisé la méthode "posToCoord". Cette methode appelle elle même la methode "tailleLigne" qui renvoie un tableau contenant la taille de chaqu'une des lignes du plateau. Cela afin de faciliter les opérations dans posToCoord.
+Pour passer d'une position (donc un simple entier) à des coordonnées de ligne et de colonne dans un triangle nous avons réalisé la méthode "posToCoord". Cette methode appelle elle même la methode "tailleLigne" qui renvoie un tableau contenant la taille de chacune des lignes du plateau. Cela afin de faciliter les opérations dans posToCoord.
 
 Nous avons choisis d'utiliser la classe BigInteger pour le type du compteur de coups car nous nous sommes rendu compte que celui-ci pouvait depasser la valeur maximale d'un Integer normal.
 
@@ -61,12 +60,10 @@ Nous avons choisis d'utiliser la classe BigInteger pour le type du compteur de c
 2) Conclusion
 ---------------------------------------
 
-Ce qu'il y a de bien c'est que notre projet fonctionne avec n'importe qu'elle taille de plateau (testé jusqu'à 30 soit 900 triominos). La résolution devient vraiment 
-complexe lorsque l'ont augmente la base. Nous avons dû passer environ 15h sur ce projet, ce qui nous à pris le plus de temps est :
+Ce qu'il y a de bien c'est que notre projet fonctionne avec n'importe quelle taille de plateau (testé jusqu'à 30 soit 900 triominos). La résolution devient vraiment complexe lorsqu'on augmente la base. Nous avons dû passer environ 15h sur ce projet, ce qui nous à pris le plus de temps est :
 
   - la gestion des contraintes de placement
-
-  - le fait de devoir retrouver un numéro de ligne et de colonne à partir d'une position
+  - devoir retrouver un numéro de ligne et de colonne à partir d'une position
 
 
 
